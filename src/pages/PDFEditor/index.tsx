@@ -272,7 +272,7 @@ class PDFPreview extends React.PureComponent<PreviewProps, Object> {
     }
 }
 
-const PDFEditor:FunctionComponent<PageProps> = ({}) => {
+const PDFEditor:FunctionComponent<PageProps> = () => {
     const [file,setFile] = useState<Uint8Array | null>(null);
     // const [origin,setOrigin] = useState<Uint8Array | null>(null);
     const [steps,setSteps] = useState<Array<Uint8Array>>([]);
