@@ -274,7 +274,7 @@ class PDFPreview extends React.PureComponent<PreviewProps, Object> {
 
 const PDFEditor:FunctionComponent<PageProps> = ({}) => {
     const [file,setFile] = useState<Uint8Array | null>(null);
-    const [origin,setOrigin] = useState<Uint8Array | null>(null);
+    // const [origin,setOrigin] = useState<Uint8Array | null>(null);
     const [steps,setSteps] = useState<Array<Uint8Array>>([]);
     const [redo,setRedo] = useState<Array<Uint8Array>>([]);
     const [open,setOpen] = useState<Boolean>(false as Boolean);
@@ -287,7 +287,7 @@ const PDFEditor:FunctionComponent<PageProps> = ({}) => {
         let selected = new Blob([e.target.files[0]]);
         FileToArrayBuffer({ file: selected}).then((file:Uint8Array)=>{
             setFile(file);
-            setOrigin(file);
+            // setOrigin(file);
             setSteps([]);
             setRedo([]);
         });
@@ -302,11 +302,11 @@ const PDFEditor:FunctionComponent<PageProps> = ({}) => {
         if (file !== null) {
             const { image, imgType, page, posX, posY, width, height } = item;
             const pdfDoc = await PDFDocument.load(file);
-            const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+            
             const pages = pdfDoc.getPages()
             if (page !== null && page <= pages.length && image !== null) {
                 const myPage = pages[page-1];
-                const pdfImg = (imgType == "image/png") ? await pdfDoc.embedPng(image) : await pdfDoc.embedJpg(image);
+                const pdfImg = (imgType === "image/png") ? await pdfDoc.embedPng(image) : await pdfDoc.embedJpg(image);
                 const imgDims = pdfImg.scale(1);
                 myPage.drawImage(pdfImg, {
                     x: posX,
