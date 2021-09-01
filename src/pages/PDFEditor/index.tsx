@@ -37,7 +37,7 @@ interface ImageItemState {
 }
 
 interface PageParam {
-    title: string
+    
 }
 
 type PageProps = RouteComponentProps<PageParam>;
